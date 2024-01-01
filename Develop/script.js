@@ -8,9 +8,6 @@ $(document).ready(function() {
   }
 
 
-  //example of removing a class
-  //this will remove the past class and update the element with the present class
-
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -58,7 +55,7 @@ $(document).ready(function() {
   // TODO: Add code to display the current date in the header of the page.
   // Example shows current day as name of day, name of month two digit day
   //
-
+  $('#currentDay').text(dayjs().format('dddd, MMMM DD'));
 });
 
 function createTimeblocks(hour) {
