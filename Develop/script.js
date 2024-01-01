@@ -7,7 +7,7 @@ $(document).ready(function() {
   createTimeblocks(i);
   }
 
-  
+
   //example of removing a class
   //this will remove the past class and update the element with the present class
 
@@ -18,10 +18,12 @@ $(document).ready(function() {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  $('.saveButton').click(function() {
-    var hourId = $(this).attr('id').val();
-    var userText = $(this).siblings('.description').val()
-    localStorage.setItem(hourId, userText);
+  $('.saveBtn').click(function() {
+    var hourId = $(this).parent().attr('id');
+    console.log(hourId);
+    var userText = $(this).siblings('.description');
+    console.log(userText);
+    localStorage.setItem(hourId, userText.val());
   })
 
   // TODO: Add code to apply the past, present, or future class to each time
@@ -33,6 +35,7 @@ $(document).ready(function() {
   $('.time-block').each(function() {
     var blockHour = parseInt($(this).attr('id').split('-')[1]); 
     var currentHour = dayjs().hour(); 
+
     if (blockHour < currentHour) {
         $(this).addClass('past');
     } else if (blockHour === currentHour) {
@@ -45,6 +48,13 @@ $(document).ready(function() {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
+  $('.time-block').each(function() {
+    var hourId = $(this).attr('id');
+    var savedText = localStorage.getItem(hourId);
+    if (savedText) {
+        $(this).find('.description').val(savedText);
+    }
+});
   // TODO: Add code to display the current date in the header of the page.
   // Example shows current day as name of day, name of month two digit day
   //
