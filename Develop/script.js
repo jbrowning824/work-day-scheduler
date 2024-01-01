@@ -10,7 +10,6 @@ $(document).ready(function() {
   
   //example of removing a class
   //this will remove the past class and update the element with the present class
-  $('#hour-9').removeClass('past').addClass('present');
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -31,6 +30,17 @@ $(document).ready(function() {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
+  $('.time-block').each(function() {
+    var blockHour = parseInt($(this).attr('id').split('-')[1]); 
+    var currentHour = dayjs().hour(); 
+    if (blockHour < currentHour) {
+        $(this).addClass('past');
+    } else if (blockHour === currentHour) {
+        $(this).addClass('present');
+    } else {
+        $(this).addClass('future');
+    }
+});
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
